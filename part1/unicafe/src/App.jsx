@@ -10,17 +10,17 @@ const Btn = (props) =>{
 
 const StatisticLine = (props) => {
   return(
-    <p>
-      {props.text}: {props.value}
-    </p>
+    <td>
+      {props.text} {props.value}
+    </td>
   )
 }
 
 const TotalComents = (props) =>{
   return(
-    <p>
+    <td>
       all: {props.ac}
-    </p>
+    </td>
   )
 }
 
@@ -28,17 +28,17 @@ const AvgComments = (props) =>{
   const b = props.bad * (-1)
   console.log('bad number * -1:', b)
   return(
-    <p>
+    <td>
       average: {(props.g + b)/props.a}
-    </p>
+    </td>
   )
 }
 
 const PositiveComments = (props) =>{
   return(
-    <p>
+    <td>
       positive: {(props.g*100)/props.a}%
-    </p>
+    </td>
   )
 }
 
@@ -49,15 +49,28 @@ const AllStatistics = (props) =>{
   const ac = props.allComents
 
   return(
-    <>
-    <StatisticLine text={"good"} value={g} />
-    <StatisticLine text={"neutral"} value={n} />
-    <StatisticLine text={"bad"} value={b} />
-      
-    <TotalComents ac={ac} />
-    <AvgComments bad={b} a={ac} g={g} />
-    <PositiveComments g={g} a={ac} />
-      </>
+    <table>
+      <tbody>
+        <tr>
+          <StatisticLine text={"good"} value={g} />
+        </tr>
+        <tr>
+          <StatisticLine text={"neutral"} value={n} />
+        </tr>
+        <tr>
+          <StatisticLine text={"bad"} value={b} />
+        </tr>
+        <tr>
+          <TotalComents ac={ac} />
+        </tr>
+        <tr>
+          <AvgComments bad={b} a={ac} g={g} />
+        </tr>
+        <tr>
+          <PositiveComments g={g} a={ac} />
+        </tr>
+      </tbody>
+    </table>
   )
 }
 
