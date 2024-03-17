@@ -42,6 +42,29 @@ const PositiveComments = (props) =>{
   )
 }
 
+const AllStatistics = (props) =>{
+  const g = props.good
+  const n = props.neutral
+  const b = props.bad
+  const ac = props.allComents
+
+  return(
+    <>
+    <h2>
+      Statistics 
+    </h2>
+    <BtnStcs text={"good"} value={g} />
+    <BtnStcs text={"neutral"} value={n} />
+    <BtnStcs text={"bad"} value={b} />
+    
+    <TotalComents ac={ac} />
+    <AvgComments bad={b} a={ac} g={g} />
+    <PositiveComments g={g} a={ac} />
+
+    </>
+  )
+}
+
 const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
@@ -74,17 +97,7 @@ const App = () => {
 
     <Btn onClick={()=>badClick()} text={"bad"} />
     
-    <h2>
-      Statistics
-    </h2>
-
-    <BtnStcs text={"good"} value={good} />
-    <BtnStcs text={"neutral"} value={neutral} />
-    <BtnStcs text={"bad"} value={bad} />
-    
-    <TotalComents ac={allComents} />
-    <AvgComments bad={bad} a={allComents} g={good} />
-    <PositiveComments g={good} a={allComents} />
+    <AllStatistics good={good} neutral={neutral} bad={bad} allComents={allComents} />
 
     </>
   )
