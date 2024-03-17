@@ -50,19 +50,29 @@ const AllStatistics = (props) =>{
 
   return(
     <>
-    <h2>
-      Statistics 
-    </h2>
     <BtnStcs text={"good"} value={g} />
     <BtnStcs text={"neutral"} value={n} />
     <BtnStcs text={"bad"} value={b} />
-    
+      
     <TotalComents ac={ac} />
     <AvgComments bad={b} a={ac} g={g} />
     <PositiveComments g={g} a={ac} />
-
-    </>
+      </>
   )
+}
+
+const IsFeedbackZero = (props) =>{
+  if (props.ac === 0) {
+    return(
+    <p>
+      No feedback given
+    </p>
+    )
+  }else{
+    return(
+    <AllStatistics good={props.g} neutral={props.n} bad={props.b} allComents={props.ac} /> 
+    )
+  }
 }
 
 const App = () => {
@@ -97,8 +107,11 @@ const App = () => {
 
     <Btn onClick={()=>badClick()} text={"bad"} />
     
-    <AllStatistics good={good} neutral={neutral} bad={bad} allComents={allComents} />
+    <h2>
+      Statistics 
+    </h2>
 
+    <IsFeedbackZero ac={allComents} g={good} n={neutral} b={bad} />
     </>
   )
 }
