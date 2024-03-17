@@ -8,7 +8,7 @@ const Btn = (props) =>{
   )
 }
 
-const BtnStcs = (props) => {
+const StatisticLine = (props) => {
   return(
     <p>
       {props.text}: {props.value}
@@ -50,9 +50,9 @@ const AllStatistics = (props) =>{
 
   return(
     <>
-    <BtnStcs text={"good"} value={g} />
-    <BtnStcs text={"neutral"} value={n} />
-    <BtnStcs text={"bad"} value={b} />
+    <StatisticLine text={"good"} value={g} />
+    <StatisticLine text={"neutral"} value={n} />
+    <StatisticLine text={"bad"} value={b} />
       
     <TotalComents ac={ac} />
     <AvgComments bad={b} a={ac} g={g} />
