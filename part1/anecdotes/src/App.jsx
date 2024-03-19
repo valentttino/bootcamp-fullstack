@@ -12,13 +12,23 @@ const App = () => {
     'The only way to go fast, is to go well.'
   ]
 
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState(0)
+  const [points, setPoints] = useState({0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0})
 
   function randomInt(max) {
-    return Math.floor(Math.random() * max);
+    return Math.floor(Math.random() * max)
   }
 
-  console.log('selected Value:', selected);
+  const voteAnecdote = (number) =>{
+    const copy = {
+      ...points,
+      [number]: points[number] + 1
+    }
+    setPoints(copy)
+  }
+
+  console.log('selected Value:', selected)
+  console.log('points:',points)
 
   return (
     <div>
@@ -26,6 +36,9 @@ const App = () => {
       <br />
       <button onClick={() => setSelected(randomInt(8))}>
        next anecdote
+      </button>
+      <button onClick={() => voteAnecdote(selected)}>
+        vote
       </button>
     </div>
   )
