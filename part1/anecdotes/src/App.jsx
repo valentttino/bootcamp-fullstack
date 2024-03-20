@@ -1,5 +1,33 @@
 import { useState } from 'react'
 
+const AnecdoteWMV = (props) =>{
+  let anec = props.anecdotes
+  let pts = props.points
+  console.log('Anecdotes:', anec)
+  console.log('Pts:', pts)
+
+  let bestanec = ''
+  let maxpoints = 0
+  for (let i=0, j=1; i<8 && j<8; i++, j++){
+    if ((pts[i]>pts[j]) && (pts[i]>maxpoints)){
+      maxpoints = pts[i]
+      bestanec = anec[i]
+      console.log('Max points:', maxpoints)
+      console.log('best anec:',bestanec)
+    }
+  }
+  return(
+    <>
+      <p>
+        {bestanec}
+      </p>
+      <p>
+        Has: {maxpoints} votes!
+      </p>
+    </>
+  )
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -32,6 +60,9 @@ const App = () => {
 
   return (
     <div>
+      <h1>
+        Anecdote of the day
+      </h1>
       {anecdotes[selected]}
       <br />
       <button onClick={() => setSelected(randomInt(8))}>
@@ -40,6 +71,11 @@ const App = () => {
       <button onClick={() => voteAnecdote(selected)}>
         vote
       </button>
+
+      <h2>
+        Anecdote whit most votes
+      </h2>
+      <AnecdoteWMV anecdotes={anecdotes} points={points} />
     </div>
   )
 }
