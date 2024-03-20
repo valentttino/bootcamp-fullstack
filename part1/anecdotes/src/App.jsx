@@ -57,7 +57,6 @@ const App = () => {
 
   console.log('selected Value:', selected)
   console.log('points:',points)
-
   return (
     <div>
       <h1>
