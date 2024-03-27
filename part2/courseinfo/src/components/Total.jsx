@@ -1,15 +1,15 @@
-const Total = (props) =>{
-const arrayOfExs = props.nex
-
-const sumWithInitial = arrayOfExs.reduce(
-    (accumulator, currentValue) => accumulator + currentValue.exercises, 
-    0 
+const Total = ({parts=[]}) =>{
+    const sumWithInitial = parts.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.exercises, 
+        0 
     )
+    
+    return(
+        <p>
+            <strong>Total of {sumWithInitial} exercises</strong>
+        </p>
+    )
+}
 
-return(
-    <p>
-        <strong>Total of {sumWithInitial} exercises</strong>
-    </p>
-)}
 
 export default Total
