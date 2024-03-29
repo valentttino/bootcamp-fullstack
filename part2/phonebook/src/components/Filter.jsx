@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Contacts from './Contacts'
 
 const Filter = () =>{
     const [newFilter, setFilter] = useState('')
@@ -9,6 +10,7 @@ const Filter = () =>{
                 filter shown with
                 <input />
             </form>
+            {<Contacts newFilter={newFilter} />}
         </div>
     )
 }
