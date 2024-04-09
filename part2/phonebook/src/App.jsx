@@ -3,7 +3,7 @@ import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Contacts from './components/Contacts'
 import axios from 'axios'
-
+import personService from './services/persons'
 
 // create the components: Filter - PersonForm - Contacts
 
@@ -98,13 +98,9 @@ const App = () =>{
   const [persons, setPersons] = useState([])
 
   useEffect( () => {
-    console.log('effect')
-    axios
-    .get('http://localhost:3001/persons')
-    .then(response => {
-      console.log('promise fulfilled')
-      setPersons(response.data)
-    })
+    personService
+    .getAll()
+    .then(response => setPersons(response.data))
   }, [])
 
   console.log('render', persons.length, 'contacts')
