@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import axios from 'axios'
 
 const PersonForm = ({persons = [], setPersons}) =>{
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
 
-    const addPerson = (event) =>{
+    const addPerson = event =>{
         event.preventDefault()
     
         const isNameAlreadyAdded = persons.some(persons => persons.name === newName)
@@ -12,13 +13,16 @@ const PersonForm = ({persons = [], setPersons}) =>{
         if (!isNameAlreadyAdded){
           const personObject ={
             name: newName,
-            number: newNumber,
-            id: persons.length+1
+            number: newNumber
           }
-    
-          setPersons(persons.concat(personObject))
-          setNewName('')
-          setNewNumber('')
+          
+          axios
+            .post('http://localhost:3001/persons', personObject)
+            .then(response => {
+                setPersons(persons.concat(response.data))
+                setNewName('')
+                setNewNumber('')  
+            })
         } else {
           return(alert(`${newName} is already added to phonebook`))
         }
