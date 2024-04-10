@@ -24,10 +24,10 @@ const Contacts = ({persons=[], newFilter='', setPersons}) =>{
                 return newFilter.toLowerCase() === '' ? x : x.name.toLowerCase().includes(newFilter)
             })
             .map(x=>
-                <div key={x.id}>
-                {x.name} {x.number} {' '}
-                <button onClick={()=> handleDelete(x.id, x.name)}>delete</button>
-                </div>
+                <li className='contacts' key={x.id}>
+                    {x.name} {x.number} {' '}
+                    <button onClick={()=> handleDelete(x.id, x.name)}>delete</button>
+                </li>
             )}
         </div>
     )

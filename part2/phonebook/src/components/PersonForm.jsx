@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import personService from '../services/persons'
+import NotificationM from './NotificationM'
+
 
 const PersonForm = ({persons = [], setPersons}) =>{
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
+    const [notificationMessage, setNotificationMessage] = useState(null)
 
     const addPerson = event =>{
         event.preventDefault()
@@ -11,15 +14,19 @@ const PersonForm = ({persons = [], setPersons}) =>{
         const isNameAlreadyAdded = persons.some(persons => persons.name === newName)
     
         if (!isNameAlreadyAdded){
-          const personObject ={name: newName, number: newNumber}
-          
+          const personObject ={name: newName, number: newNumber};
+          console.log('enviando a notification: ', newName);
+          <NotificationM nameContact={newName} />
           personService
             .create(personObject)
             .then(response =>{
                 setPersons(persons.concat(response.data))
+                setNotificationMessage(`Added ${newName}`)
+                setTimeout(() => {setNotificationMessage(null)}, 5000)
                 setNewName('')
                 setNewNumber('')
             })
+
         } else {
           const replaceNumberConfirm = window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)
           if (replaceNumberConfirm){
@@ -55,6 +62,7 @@ const PersonForm = ({persons = [], setPersons}) =>{
 
     return(
         <div>
+            <NotificationM message={notificationMessage} />
             <form onSubmit={addPerson}>
             <div>
                 name: 

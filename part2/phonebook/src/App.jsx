@@ -106,17 +106,17 @@ const App = () =>{
 
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h1>Phonebook</h1>
 
       <Filter />
 
-      <h3>Add a new</h3>
+      <h2>add a new</h2>
 
       <PersonForm persons={persons}
         setPersons={setPersons}
       />
 
-      <h3>Numbers</h3>
+      <h2>contacts</h2>
 
       <Contacts persons={persons} setPersons={setPersons}/>
     </div>
