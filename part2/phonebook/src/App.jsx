@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Contacts from './components/Contacts'
-import axios from 'axios'
 import personService from './services/persons'
 
 // create the components: Filter - PersonForm - Contacts

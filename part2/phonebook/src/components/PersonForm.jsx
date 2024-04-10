@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import axios from 'axios'
 import personService from '../services/persons'
 
 const PersonForm = ({persons = [], setPersons}) =>{
@@ -12,10 +11,7 @@ const PersonForm = ({persons = [], setPersons}) =>{
         const isNameAlreadyAdded = persons.some(persons => persons.name === newName)
     
         if (!isNameAlreadyAdded){
-          const personObject ={
-            name: newName,
-            number: newNumber
-          }
+          const personObject ={name: newName, number: newNumber}
           
           personService
             .create(personObject)
@@ -25,10 +21,28 @@ const PersonForm = ({persons = [], setPersons}) =>{
                 setNewNumber('')
             })
         } else {
-          return(alert(`${newName} is already added to phonebook`))
-        }
+          const replaceNumberConfirm = window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)
+          if (replaceNumberConfirm){
+            const personObject ={name: newName, number: newNumber}
+
+            const findIdContact = () => {
+                const foundContact = persons.find(person => person.name === newName)
+                return foundContact ? foundContact.id : null 
+            }
+        
+            const id = findIdContact()
+
+            personService
+                .update(id, personObject)
+                .then(response =>{
+                    setPersons(persons.map(person => person.id !== id ? person : response.data))
+                    setNewName('')
+                    setNewNumber('')
+                })
+            }
       }
-    
+    }
+
     const handleNameChange = (event) =>{
         console.log(event.target.value)
         setNewName(event.target.value)
@@ -62,5 +76,6 @@ const PersonForm = ({persons = [], setPersons}) =>{
         </div>
     )
 }
+
 
 export default PersonForm
