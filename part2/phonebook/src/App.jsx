@@ -119,7 +119,7 @@ const App = () =>{
 
       <h3>Numbers</h3>
 
-      <Contacts persons={persons}/>
+      <Contacts persons={persons} setPersons={setPersons}/>
     </div>
   )
 }
