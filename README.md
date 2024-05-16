@@ -18,4 +18,4 @@
 *Available in:* https://phonebook-backend-y73h.onrender.com
 
 ## Progress
-▰▰▱▱▱▱▱▱▱▱ 23%
+▰▰▰▰▱▱▱▱▱▱ 39%
