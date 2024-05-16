@@ -44,6 +44,29 @@ test('verify property of unique identifier', async () => {
     assert.strictEqual(response.body._id, blogId)
 })
 
+test('verify http post requests', async () =>{
+    const newBlog ={
+        title: 'This blog was writted by Supertest :D',
+        author: 'supertest',
+        url: 'supertest-article.blogspot.com',
+        likes: 1992
+    }
+
+    await api
+        .post('/api/blogs')
+        .send(newBlog)
+        .expect(201)
+        .expect('Content-Type', /application\/json/)
+
+    const response = await api.get('/api/blogs')
+
+    const titles = response.body.map (t => t.title)
+
+    assert.strictEqual(response.body.length, initialBlogs.length + 1)
+
+    assert(titles.includes('This blog was writted by Supertest :D'))
+})
+
 after(async () => {
   await mongoose.connection.close()
 })
