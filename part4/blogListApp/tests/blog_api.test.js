@@ -76,6 +76,47 @@ test('testing delete by id function', async () =>{
     await api.delete(`/api/blogs/${idBlogToDelete}`).expect(204)
 })
 
+test('making changes in a blog by id', async () =>{
+    const response = await api.get('/api/blogs')
+    const blogs = response.body
+    assert(blogs.length > 0, 'no blogs to change found')
+    const idBlogToChange = blogs[0].id
+
+    const blog = {
+        "title": "This title was changed in Supertest",
+        "author": "TheProgrammer",
+        "url": "falseurl.dev",
+        "likes": 1974
+    }
+
+    await api
+        .put(`/api/blogs/${idBlogToChange}`)
+        .send(blog)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+    
+    const responseAfterChanges = await api.get('/api/blogs')
+    const titles = responseAfterChanges.body.map (t => t.title)
+    assert(titles.includes('This title was changed in Supertest'))  
+})
+
+test('change the likes in a blog by id', async() =>{
+    const response = await api.get('/api/blogs')
+    const blogs = response.body
+    assert(blogs.length > 0, 'no blogs to change found')
+    const idBlogToChange = blogs[0].id
+
+    const blog = {
+        "likes": 666
+    }
+
+    await api
+        .put(`/api/blogs/${idBlogToChange}`)
+        .send(blog)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+})
+
 after(async () => {
   await mongoose.connection.close()
 })
