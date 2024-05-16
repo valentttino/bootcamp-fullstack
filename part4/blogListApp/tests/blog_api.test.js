@@ -1,4 +1,4 @@
-const { test, after, before } = require('node:test')
+const { test, after, beforeEach } = require('node:test')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const assert = require('assert')
@@ -22,10 +22,10 @@ const initialBlogs = [
     }
   ]
 
-  before(async () => {
+beforeEach(async () => {
     await Blog.deleteMany({})
     await Blog.insertMany(initialBlogs)
-  })
+})
 
 test('blogs are returned as json', async () => {
   await api
