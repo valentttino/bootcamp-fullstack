@@ -67,6 +67,15 @@ test('verify http post requests', async () =>{
     assert(titles.includes('This blog was writted by Supertest :D'))
 })
 
+test('testing delete by id function', async () =>{
+    const response = await api.get('/api/blogs')
+    const blogs = response.body
+    assert(blogs.length > 0, 'no blogs to delete found')
+    const idBlogToDelete = blogs[0].id
+
+    await api.delete(`/api/blogs/${idBlogToDelete}`).expect(204)
+})
+
 after(async () => {
   await mongoose.connection.close()
 })
