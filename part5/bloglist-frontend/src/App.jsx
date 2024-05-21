@@ -112,6 +112,8 @@ const App = () => {
   )
 
   const addBlogForm = () =>(
+    <>
+    <h2>create new</h2>
     <form onSubmit={addBlog}>
       <div>
         title
@@ -134,8 +136,9 @@ const App = () => {
         onChange={handleUrlChange}
         />
       </div>
-      <button type='submit'>save</button>
+      <button type='submit'>create</button>
     </form>
+    </>
   )
 
   const blogList = () => (
