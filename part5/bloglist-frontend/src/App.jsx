@@ -15,10 +15,6 @@ const App = () => {
   const [notificationMessage, setNotificationMessage] = useState(null)
   const [loginVisible, setLoginVisible] = useState(false)
 
-  const [newBlogTitle, setNewBlogTitle] = useState('')
-  const [newBlogAuthor, setNewBlogAuthor] = useState('')
-  const [newBlogUrl, setNewBlogUrl] = useState('')
-
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
@@ -34,38 +30,16 @@ const App = () => {
     }
   }, [])
 
-  const addBlog = (event) => {
-    event.preventDefault()
-    const blogObject = {
-      title: newBlogTitle,
-      author: newBlogAuthor,
-      url: newBlogUrl,
-    }
-
+  const addBlog = (blogObject) => {
     blogService
       .create(blogObject)
-        .then(returnedBlog => {
+      .then(returnedBlog => {
           setBlogs(blogs.concat(returnedBlog))
-          setNotificationMessage(`a new blog ${newBlogTitle} by ${newBlogAuthor} added`)
+          setNotificationMessage(`a new blog '${returnedBlog.title}' by ${returnedBlog.author} added`)
           setTimeout(() => {
             setNotificationMessage(null)
           }, 5000)
-          setNewBlogTitle('')
-          setNewBlogUrl('')
-          setNewBlogAuthor('')
         })
-  }
-
-  const handleTitleChange = (event) => {
-    setNewBlogTitle(event.target.value)
-  }
-
-  const handleAuthorChange = (event) =>{
-    setNewBlogAuthor(event.target.value)
-  }
-
-  const handleUrlChange = (event) =>{
-    setNewBlogUrl(event.target.value)
   }
 
   const handleLogin = async (event) =>{
@@ -130,13 +104,7 @@ const App = () => {
             <button onClick={logoutAction}>logout</button>
             <Togglable buttonLabel="new blog">
               <BlogForm
-                addBlog={addBlog}
-                newBlogTitle={newBlogTitle}
-                handleTitleChange={handleTitleChange}
-                newBlogAuthor={newBlogAuthor}
-                handleAuthorChange={handleAuthorChange}
-                newBlogUrl={newBlogUrl}
-                handleUrlChange={handleUrlChange}
+                createBlog={addBlog}
               />
             </Togglable>
           </div>
