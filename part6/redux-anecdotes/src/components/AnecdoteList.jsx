@@ -13,7 +13,7 @@ const AnecdoteList = () =>{
         }    
     )
 
-    const anecdotesSort = anecdotes.sort( (a,b) => {
+    const anecdotesSort = [...anecdotes].sort( (a,b) => {
         if(a.votes < b.votes){
           return 1
         }
