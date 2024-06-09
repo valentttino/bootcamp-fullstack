@@ -18,10 +18,10 @@ const App = () => {
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
-    )  
+    )
   }, [])
 
-  useEffect(()=> {
+  useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBloglistAppUser')
     if (loggedUserJSON){
       const user = JSON.parse(loggedUserJSON)
@@ -44,25 +44,25 @@ const App = () => {
     blogService
       .create(blogObject)
       .then(returnedBlog => {
-          setBlogs(blogs.concat(returnedBlog))
-          setNotificationMessage(`a new blog '${returnedBlog.title}' by ${returnedBlog.author} added`)
-          setTimeout(() => {
-            setNotificationMessage(null)
-          }, 5000)
-        })
+        setBlogs(blogs.concat(returnedBlog))
+        setNotificationMessage(`a new blog '${returnedBlog.title}' by ${returnedBlog.author} added`)
+        setTimeout(() => {
+          setNotificationMessage(null)
+        }, 5000)
+      })
   }
 
-  const removeBlog = async id =>{
+  const removeBlog = async id => {
     await blogService.remove(id)
     setBlogs(blogs.filter(blog => blog.id !== id))
   }
 
-  const handleLogin = async (event) =>{
+  const handleLogin = async (event) => {
     event.preventDefault()
     console.log('loggin in with', username, password) // admin admin
 
     try{
-      const user = await loginService.login({username, password})
+      const user = await loginService.login({ username, password })
 
       window.localStorage.setItem('loggedBloglistAppUser', JSON.stringify(user))
 
@@ -79,8 +79,8 @@ const App = () => {
   }
 
   const loginForm = () => {
-    const hideWhenVisible = {display: loginVisible ? 'none' : ''}
-    const showWhenVisible = {display: loginVisible? '' : 'none'}
+    const hideWhenVisible = { display: loginVisible ? 'none' : '' }
+    const showWhenVisible = { display: loginVisible? '' : 'none' }
 
     return(
       <div>
@@ -88,20 +88,20 @@ const App = () => {
           <button onClick={() => setLoginVisible(true)}>log in</button>
         </div>
         <div style={showWhenVisible}>
-          <LoginForm 
+          <LoginForm
             username={username}
             password={password}
             handleLogin={handleLogin}
-            handleUsernameChange={({target}) => setUsername(target.value)}
-            handlePasswordChange={({target}) => setPassword(target.value)}
+            handleUsernameChange={({ target }) => setUsername(target.value)}
+            handlePasswordChange={({ target }) => setPassword(target.value)}
           />
-          <button onClick={()=> setLoginVisible(false)}>cancel</button>
+          <button onClick={() => setLoginVisible(false)}>cancel</button>
         </div>
       </div>
     )
   }
 
-  const logoutAction = () =>{
+  const logoutAction = () => {
     window.localStorage.removeItem('loggedBloglistAppUser')
     setUser(null)
   }
@@ -112,7 +112,7 @@ const App = () => {
       <Notification message={notificationMessage} />
 
       {!user && loginForm()}
-      {user && 
+      {user &&
         <div>
           <div>
             <p>{user.name} logged in</p>
@@ -129,7 +129,7 @@ const App = () => {
             )}
           </div>
         </div>
-        }
+      }
     </>
   )
 }

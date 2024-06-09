@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from 'react'
 import blogService from '../services/blogs'
 
 const Blog = ({ blog, username, onRemove }) => {
@@ -7,7 +7,7 @@ const Blog = ({ blog, username, onRemove }) => {
 
   const blogUser = blog.user || {}
 
-  const removeBlog = () =>{
+  const removeBlog = () => {
     if(window.confirm(`Remove blog '${blog.title}' by ${blog.author}?`)) onRemove(blog.id)
   }
 
@@ -19,9 +19,9 @@ const Blog = ({ blog, username, onRemove }) => {
     borderWidth: 1,
     marginBottom: 5
   }
-  
+
   const showWhenVisible = {
-    display: blogsDetailsVisible? '' : 'none', 
+    display: blogsDetailsVisible? '' : 'none',
     paddingTop: 10,
     paddingLeft: 2,
     border: 'solid',
@@ -32,7 +32,7 @@ const Blog = ({ blog, username, onRemove }) => {
   const handleLikes = async () => {
     const updatedBlog = {
       ...blog, likes: likes + 1
-    } 
+    }
 
     const returnedBlog = await blogService.update(blog.id, updatedBlog)
     setLikes(returnedBlog.likes)
@@ -41,19 +41,19 @@ const Blog = ({ blog, username, onRemove }) => {
   return(
     <div>
       <div style={hideWhenVisible}>
-        {blog.title} 
+        {blog.title}
         <button onClick={() => setBlogsDetailsVisible(true)}>view</button>
       </div>
 
       <div style={showWhenVisible}>
         {blog.title}
         <button onClick={() => setBlogsDetailsVisible(false)}>hide</button> <br />
-        {blog.url} <br /> 
+        {blog.url} <br />
         likes {likes} <button onClick={handleLikes}>like</button> <br />
         {blog.author} <br />
         {(username === blogUser.username)? <button onClick={() => removeBlog(blog)}>remove</button> : null}
       </div>
-  </div>
+    </div>
   )
 }
 
