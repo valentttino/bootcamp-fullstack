@@ -31,8 +31,6 @@ const App = () => {
   }, [])
 
   const blogsSort = blogs.sort((a, b) => {
-    console.log("a",a.likes)
-    console.log("b",b.likes)
     if(a.likes < b.likes){
       return 1
     }
@@ -41,8 +39,6 @@ const App = () => {
     }
     return 0
   })
-
-  console.log('blogs ordenados: ', blogsSort)
 
   const addBlog = (blogObject) => {
     blogService
@@ -54,6 +50,11 @@ const App = () => {
             setNotificationMessage(null)
           }, 5000)
         })
+  }
+
+  const removeBlog = async id =>{
+    await blogService.remove(id)
+    setBlogs(blogs.filter(blog => blog.id !== id))
   }
 
   const handleLogin = async (event) =>{
@@ -105,7 +106,6 @@ const App = () => {
     setUser(null)
   }
 
-
   return (
     <>
       <h1>BlogListAPP</h1>
@@ -125,7 +125,7 @@ const App = () => {
           </div>
           <div>
             {blogsSort.map(blog =>
-              <Blog key={blog.id} blog={blog} />
+              <Blog key={blog.id} blog={blog} username={user.username} onRemove={removeBlog}/>
             )}
           </div>
         </div>
