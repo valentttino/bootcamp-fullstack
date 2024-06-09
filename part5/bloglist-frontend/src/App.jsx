@@ -30,6 +30,20 @@ const App = () => {
     }
   }, [])
 
+  const blogsSort = blogs.sort((a, b) => {
+    console.log("a",a.likes)
+    console.log("b",b.likes)
+    if(a.likes < b.likes){
+      return 1
+    }
+    if(a.likes > b.likes){
+      return -1
+    }
+    return 0
+  })
+
+  console.log('blogs ordenados: ', blogsSort)
+
   const addBlog = (blogObject) => {
     blogService
       .create(blogObject)
@@ -110,7 +124,7 @@ const App = () => {
             </Togglable>
           </div>
           <div>
-            {blogs.map(blog =>
+            {blogsSort.map(blog =>
               <Blog key={blog.id} blog={blog} />
             )}
           </div>
