@@ -1,6 +1,7 @@
 # Full-Stack Bootcamp
 
 ## Stack
+
 * HTML
 * CSS
 * React
@@ -11,11 +12,13 @@
 * TypeScript
 
 ### Backend - Part 3
+
 **Phonebook Backend** is being developed in another repository.
 
-*Repository link:* https://github.com/valentttino/phonebook_backend
+*Repository link:* [Phone Backend](https://github.com/valentttino/phonebook_backend)
 
-*Available in:* https://phonebook-backend-y73h.onrender.com
+*Available in:* [Phoneebook](https://phonebook-backend-y73h.onrender.com)
 
 ## Progress
-▰▰▰▰▱▱▱▱▱▱ 39%
+
+▰▰▰▰▰▱▱▱▱▱ 54%
