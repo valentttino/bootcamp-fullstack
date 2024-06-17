@@ -44,6 +44,11 @@
       "id": "06c3",
       "content": "send to backend? p2",
       "votes": 0
+    },
+    {
+      "id": "fcce",
+      "content": "with redux",
+      "votes": 0
     }
   ]
 }
